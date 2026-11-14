@@ -48,6 +48,7 @@ class ParsedAddress:
     region_id: int | None = None
     regions: list = field(default_factory=list)
     unknown_fields: list = field(default_factory=list)
+    no_derp: bool = False
 
     @property
     def masked(self) -> str:
@@ -65,6 +66,7 @@ class ParsedAddress:
             "region_id": self.region_id,
             "embedded_derp_regions": [r.get("region_code") or r.get("region_id") for r in self.regions],
             "unknown_fields": sorted(self.unknown_fields),
+            "has_derp_info": not self.no_derp,
         }
 
 
@@ -171,6 +173,9 @@ def parse_address(text: str) -> ParsedAddress:
         if not parsed.regions:
             raise AddrError("ADDR_BAD_REGION", "field 'r' is an empty array", "error")
 
+    # Upstream encodes RegionID with `omitempty`, so a ConnInfo whose region id is
+    # the zero value still serializes to a valid address without 'i' or 'r'.
+    # That is decodable by tailcat.ParseAddr; report it, do not reject it.
     if parsed.region_id is None and not parsed.regions:
-        raise AddrError("ADDR_NO_DERP", "address carries neither a region id ('i') nor region metadata ('r')", "error")
+        parsed.no_derp = True
     return parsed

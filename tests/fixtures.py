@@ -78,6 +78,11 @@ def embedded_bearer(tag="embedded-bearer"):
     return encode(payload)
 
 
+def no_derp(tag="noderp"):
+    # ConnInfo.Addr() omits RegionID when it is the zero value.
+    return encode({"p": _key(tag + ":server")})
+
+
 def bad_key_length(tag="badkey"):
     return encode({"p": _key(tag + ":server")[:16], "i": 1})
 

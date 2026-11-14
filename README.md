@@ -99,7 +99,8 @@ scanned 2 files, 1173 bytes; 2 error(s), 0 warning(s), 4 info
 | `EMBEDDED_DERP` | info | `r` present: relay set is pinned inside the address |
 | `PSK_ZERO_FIELD` | warning | `q` is 32 zero bytes (upstream omits the field instead) |
 | `UNKNOWN_FIELDS` | warning | CBOR keys outside `p/k/q/r/i` |
-| `ADDR_*` | error/warning | malformed base64, CBOR, key length, trailing bytes, missing DERP |
+| `ADDR_NO_DERP` | warning | no `i`/`r`: upstream omits a zero region id, so the client picks a relay |
+| `ADDR_*` | error/warning | malformed base64, CBOR, key length, trailing bytes, missing prefix |
 
 ## 与同类项目的差异
 

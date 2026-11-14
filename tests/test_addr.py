@@ -71,6 +71,13 @@ class ParseTests(unittest.TestCase):
         parsed = parse_address(fixtures.unknown_field())
         self.assertEqual(parsed.unknown_fields, ["z"])
 
+    def test_zero_region_id_is_valid_but_flagged(self):
+        # Upstream marshals RegionID with omitempty; ParseAddr accepts the result.
+        parsed = parse_address(fixtures.no_derp())
+        self.assertTrue(parsed.no_derp)
+        self.assertIsNone(parsed.region_id)
+        self.assertFalse(parsed.as_dict()["has_derp_info"])
+
     def test_fingerprint_is_stable_and_short_form_is_redacted(self):
         addr = fixtures.no_psk()
         a = parse_address(addr)

@@ -110,6 +110,18 @@ class CliTests(unittest.TestCase):
         self.assertIn("fp=", proc.stdout)
         self.assertIn("2 error(s)", proc.stdout)
 
+    def test_no_derp_address_is_a_warning_not_invalid(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            path = os.path.join(tmp, "addr.txt")
+            with open(path, "w") as fh:
+                fh.write("relay picked at runtime: %s\n" % fixtures.no_derp())
+            proc = run("scan", path, "--json", "--fail-on", "warning")
+            self.assertEqual(proc.returncode, 1, proc.stderr)
+            payload = json.loads(proc.stdout)
+            rules = {f["rule"] for f in payload["findings"]}
+            self.assertIn("ADDR_NO_DERP", rules)
+            self.assertNotIn("ADDR_CBOR_INVALID", rules)
+
     def test_show_address_opt_in(self):
         proc = run("scan", os.path.join(EXAMPLES, "clean"), "--json", "--show-address")
         payload = json.loads(proc.stdout)

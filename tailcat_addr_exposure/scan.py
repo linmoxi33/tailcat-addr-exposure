@@ -135,6 +135,16 @@ def findings_for_token(token: str, path: str, line_no: int, column: int, line: s
                 **detail,
             )
         )
+    if parsed.no_derp:
+        out.append(
+            Finding(
+                rule="ADDR_NO_DERP",
+                severity="warning",
+                message="no 'i' or 'r' field: upstream omits a zero region id, so the client must pick a relay itself",
+                **base,
+                **detail,
+            )
+        )
     if parsed.regions:
         out.append(
             Finding(
