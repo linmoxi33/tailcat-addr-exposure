@@ -15,7 +15,7 @@ Upstream is explicit that the default address is a secret:
 - The docs vs. blog post contradiction is an **open issue**: https://github.com/tailscale/tailcat/issues/105
 - The PSK-in-address / DNS-TXT publication hazard is an **open issue**: https://github.com/tailscale/tailcat/issues/133
 
-The only upstream affordance is `tailcat parse <addr>`, which dumps the wire struct as JSON — including the pre-shared key, because `PresharedKey.MarshalText` renders it as `psk:<hex>` (https://github.com/tailscale/tailcat/blob/main/tailcat.go#L246-L252, dispatch at https://github.com/tailscale/tailcat/blob/main/cmd/tailcat/tailcat.go#L1196-L1199). There is no scanner, no classification, and no redacted output. Generic secret scanners have no rule for the `tc` prefix, so a leaked tailcat address walks straight past them.
+The only upstream affordance is `tailcat parse <addr>`, which dumps the wire struct as JSON — including the pre-shared key, because `PresharedKey.MarshalText` renders it as `psk:<hex>` (https://github.com/tailscale/tailcat/blob/main/tailcat.go#L246-L252, dispatch at https://github.com/tailscale/tailcat/blob/main/cmd/tailcat/tailcat.go#L1196-L1199). There is no scanner, no classification, and no redacted output. Generic secret scanners have no rule for the `tc` prefix — gitleaks' bundled 3,209-line `config/gitleaks.toml` contains no tailcat/WireGuard entry (checked 2026-11-14) — so a leaked tailcat address walks straight past them.
 
 ## What this tool does / does not do
 
