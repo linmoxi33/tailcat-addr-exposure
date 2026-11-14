@@ -1,0 +1,33 @@
+{
+  "findings": [
+    {
+      "column": 5,
+      "context": "doc",
+      "file": "examples/in/clean/README.md",
+      "fingerprint": "04e06b33273e1fb1997056614a0c6dd833d6ca695ad8c38b8c1f6ddae7b511c5",
+      "has_psk": false,
+      "length": 104,
+      "line": 6,
+      "message": "address has no pre-shared key (--psk=false or pre-v0.6.0); publishing it is safe only when the server authenticates clients",
+      "region_id": 2,
+      "rule": "NO_PSK_ADDRESS",
+      "severity": "info"
+    }
+  ],
+  "scanned": {
+    "addresses": 1,
+    "bytes": 259,
+    "files": 1,
+    "paths": [
+      "examples/in/clean"
+    ]
+  },
+  "schema": 1,
+  "summary": {
+    "error": 0,
+    "info": 1,
+    "warning": 0
+  },
+  "tool_version": "1.0.0",
+  "worst_severity": "info"
+}

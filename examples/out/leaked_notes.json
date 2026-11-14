@@ -1,0 +1,98 @@
+{
+  "findings": [
+    {
+      "column": 5,
+      "context": "doc",
+      "file": "examples/in/clean/README.md",
+      "fingerprint": "04e06b33273e1fb1997056614a0c6dd833d6ca695ad8c38b8c1f6ddae7b511c5",
+      "has_psk": false,
+      "length": 104,
+      "line": 6,
+      "message": "address has no pre-shared key (--psk=false or pre-v0.6.0); publishing it is safe only when the server authenticates clients",
+      "region_id": 2,
+      "rule": "NO_PSK_ADDRESS",
+      "severity": "info"
+    },
+    {
+      "column": 5,
+      "context": "doc",
+      "file": "examples/in/leaked_notes.md",
+      "fingerprint": "a6dadbecab6a3394cffd6872b8ce7ad3d8daa8143b8cf6b943aa77e444e5af79",
+      "has_psk": true,
+      "length": 249,
+      "line": 5,
+      "message": "address carries a pre-shared key and must be treated as a password; rotate it if this file can be published",
+      "region_id": null,
+      "rule": "BEARER_SECRET",
+      "severity": "error"
+    },
+    {
+      "column": 5,
+      "context": "doc",
+      "file": "examples/in/leaked_notes.md",
+      "fingerprint": "a6dadbecab6a3394cffd6872b8ce7ad3d8daa8143b8cf6b943aa77e444e5af79",
+      "has_psk": true,
+      "length": 249,
+      "line": 5,
+      "message": "address embeds 1 DERP region(s) with 1 node(s) total; fingerprint pins the relay set",
+      "region_id": null,
+      "rule": "EMBEDDED_DERP",
+      "severity": "info"
+    },
+    {
+      "column": 41,
+      "context": "dns_txt",
+      "file": "examples/in/leaked_notes.md",
+      "fingerprint": "a6dadbecab6a3394cffd6872b8ce7ad3d8daa8143b8cf6b943aa77e444e5af79",
+      "has_psk": true,
+      "length": 249,
+      "line": 9,
+      "message": "address carries a pre-shared key and appears in a publishable context; anyone who reads it can attempt to connect, and whether the server authenticates clients (--allow / --ssh-authorized-keys) cannot be verified from the address",
+      "region_id": null,
+      "rule": "BEARER_SECRET_PUBLISHED",
+      "severity": "error"
+    },
+    {
+      "column": 41,
+      "context": "dns_txt",
+      "file": "examples/in/leaked_notes.md",
+      "fingerprint": "a6dadbecab6a3394cffd6872b8ce7ad3d8daa8143b8cf6b943aa77e444e5af79",
+      "has_psk": true,
+      "length": 249,
+      "line": 9,
+      "message": "address embeds 1 DERP region(s) with 1 node(s) total; fingerprint pins the relay set",
+      "region_id": null,
+      "rule": "EMBEDDED_DERP",
+      "severity": "info"
+    },
+    {
+      "column": 5,
+      "context": "doc",
+      "file": "examples/in/leaked_notes.md",
+      "fingerprint": "04e06b33273e1fb1997056614a0c6dd833d6ca695ad8c38b8c1f6ddae7b511c5",
+      "has_psk": false,
+      "length": 104,
+      "line": 13,
+      "message": "address has no pre-shared key (--psk=false or pre-v0.6.0); publishing it is safe only when the server authenticates clients",
+      "region_id": 2,
+      "rule": "NO_PSK_ADDRESS",
+      "severity": "info"
+    }
+  ],
+  "scanned": {
+    "addresses": 2,
+    "bytes": 1173,
+    "files": 2,
+    "paths": [
+      "examples/in"
+    ]
+  },
+  "schema": 1,
+  "summary": {
+    "error": 2,
+    "info": 4,
+    "warning": 0
+  },
+  "tool_version": "1.0.0",
+  "worst_severity": "error"
+}

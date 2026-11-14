@@ -1,0 +1,9 @@
+fingerprint: fb17d2aa21afe5ae
+verdict:     bearer-secret
+length:      152 chars
+server key:  e39e2fcdef25f98d... (32 bytes)
+disco key:   present
+pre-shared:  present (SECRET)
+region id:   1
+embedded derp regions: 0
+note:        anyone holding this address can attempt to connect; only safe to publish when the server also authenticates clients (serve --allow / --ssh-authorized-keys)
