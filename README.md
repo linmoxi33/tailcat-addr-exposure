@@ -110,6 +110,24 @@ Searched before building (`gh search repos "tailcat address"`, `gh search repos 
 
 **B 档**：第一次把 tailcat 地址当作一个可判定的**凭证载体**来做离线取证——按 `wire.go` 的 `q` 字段判定 bearer secret，区分「发布到 DNS TXT 的 PSK 地址」与「无 PSK 可公开地址」，并用指纹替代原文以便报告可安全分享；上游只有会回显 PSK 的 `tailcat parse`，通用密钥扫描器对这一格式零覆盖。
 
+## Tests & reproduction
+
+The test suite is stdlib-only and runs from the repository root. `tests/__init__.py`
+makes `tests/` importable so the command also works on Python 3.12:
+
+```sh
+python3 -m unittest discover -s tests -t . -v   # 24 tests, OK
+```
+
+End-to-end CLI reproduction against the synthesized fixtures:
+
+```sh
+./bin/tailcat-addr-exposure scan examples/in --json   # exits 1: 2 errors, 0 warnings
+./bin/tailcat-addr-exposure scan examples/in --fail-on none
+```
+
+The fixtures are synthetic (see Limitations), so no live secret is needed.
+
 ## Limitations
 
 - `examples/in/*` addresses are **synthesized** deterministically from the documented wire layout (`tests/fixtures.py`), not harvested from a live server; no real secret is in this repo.
